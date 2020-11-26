@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import SubmitIdea from './SubmitIdea';
 import Register from './RegisterComponent';
 import Login from './LoginComponent';
 
@@ -14,6 +15,7 @@ class Main extends Component{
                 <Header />
                 <Switch>
                     <Route path='/home' component={ Home }/>
+                    <Route path='/submitIdea' component={ SubmitIdea }/>
                     <Route path='/register' component={ Register }/>
                     <Route path='/login' component={ Login }/>
                     <Redirect to="/home" />

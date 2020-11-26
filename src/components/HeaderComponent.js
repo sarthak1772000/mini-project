@@ -69,6 +69,13 @@ class Header extends Component{
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
+                                    <NavLink className="nav-link" to="/submitIdea">
+                                        <span className="fa fa-plus-square-o fa-lg"></span> Submit Idea
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
+                            <Nav style={{marginLeft:"10px"}} navbar>
+                                <NavItem>
                                     <NavLink className="nav-link" to="/register">
                                         <span className="fa fa-plus fa-lg"></span> Register
                                     </NavLink>
