@@ -11,7 +11,7 @@ class Login extends Component {
                             <div className="card">
                                 <div className="card-header"><b>Login</b></div>
                                 <div className="line"></div>
-                                <div className="card-body">
+                                <div className="card-body" className="login">
                                     <form>
                                         <div className="form-group text-left">
                                             <label htmlFor="exampleInputEmail1">Email address</label>
