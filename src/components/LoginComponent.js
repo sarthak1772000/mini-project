@@ -7,18 +7,20 @@ function Login(){
     const [student, setStudent] = useState(false);
     const [mentor, setMentor] = useState(false);
 
-    const PostData = () => {
+    const PostData = (e) => {
+        e.preventDefault();
+
         const payload = {
-            "email": email,
-            "password": password
+            email: email,
+            password: password
         }
 
+        console.log(payload);
+
         if(student){
-            axios.post('http://localhost:5000/students', payload)
+            axios.post('http://localhost:5000/students/login', payload)
             .then(res => {
-                if(response.status === 201){
                     alert('login successful');
-                }
             })
             .catch(err => {
                 console.log(err);
@@ -26,14 +28,12 @@ function Login(){
         }
 
         if(mentor){
-            axios.post('http://localhost:5000/mentors', payload)
-            .then(function(response){
-                if(response.status === 201){
-                    console.log('registration successful');
-                }
+            axios.post('http://localhost:5000/mentors/login', payload)
+            .then(res => {
+                    console.log('login successful');
             })
-            .catch(function(error){
-                console.log(error);
+            .catch(err => {
+                console.log(err);
             })
         }
     }
@@ -69,7 +69,7 @@ function Login(){
                                                 onChange = { (e) => setPassword(e.target.value) }
                                             />
                                         </div>
-                                        <label>Register as A</label>
+                                        <label>Login as A</label>
                                         <div className="form-check text-left">
                                             <input className="form-check-input" 
                                                 type="radio" 
@@ -77,7 +77,6 @@ function Login(){
                                                 id="exampleRadios1" 
                                                 value={student} 
                                                 onChange = {() => setStudent(!student)}
-                                                checked 
                                             />
                                             <label className="form-check-label" htmlFor="exampleRadios1">
                                                 Student 
@@ -97,9 +96,8 @@ function Login(){
                                         </div>
                                         <br />
                                         <button 
-                                            type="submit" 
                                             className="btn btn-primary"
-                                            onSubmit = {() => PostData}
+                                            onClick = {PostData}
                                         >
                                             Login
                                         </button>

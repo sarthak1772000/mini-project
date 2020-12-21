@@ -149,7 +149,7 @@ function Register(){
                                                 value={student} 
                                                 onChange = {() => setStudent(!student)}
                                             />
-                                            <label className="form-check-label" htmlFor="exampleRadios1">
+                                            <label className="form-check-label" htmlFor="student">
                                                 Student 
                                             </label>
                                         </div>
@@ -161,7 +161,7 @@ function Register(){
                                                 value={mentor}
                                                 onChange = {() => setMentor(!mentor)} 
                                             />
-                                            <label className="form-check-label" htmlFor="exampleRadios2">
+                                            <label className="form-check-label" htmlFor="mentor">
                                                 Mentor
                                             </label>
                                         </div>
