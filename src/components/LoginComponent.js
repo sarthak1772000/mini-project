@@ -15,13 +15,13 @@ function Login(){
 
         if(student){
             axios.post('http://localhost:5000/students', payload)
-            .then(function(response){
+            .then(res => {
                 if(response.status === 201){
-                    console.log('registration successful');
+                    alert('login successful');
                 }
             })
-            .catch(function(error){
-                console.log('error');
+            .catch(err => {
+                console.log(err);
             })
         }
 

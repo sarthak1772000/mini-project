@@ -28,7 +28,7 @@ function Register(){
                 password: password,
                 branch: branch,
                 linkedinProfile: linkedinProfile
-            }
+            };
 
             const payload2 = {
                 name: name,
