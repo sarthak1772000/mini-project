@@ -1,7 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import axios from "axios";
 
-class Register extends Component {
-    render(){
+function Register(){
+        const [name, setName] = useState("")
+        const [email, setEmail] = useState("");
+        const [password, setPassword] = useState("");
+        const [confirmPassword, setConfirmPassword] = useState("");
+        const [linkedinProfile, setLinkedin] = useState("");
+        const [student, setStudent] = useState(false);
+        const [mentor, setMentor] = useState(false);
+        const [branch, setBranch] = useState("");
+        const [Field, setField] = useState("");
+
+        const handleSubmitClick = (e) => {
+            e.preventDefault();
+            if(password === confirmPassword) {
+                PostData();   
+            } else {
+                console.log('Passwords do not match');
+            }
+        }
+
+        const PostData = () =>{
+            const payload1 = {
+                name: name,
+                email: email,
+                password: password,
+                branch: branch,
+                linkedinProfile: linkedinProfile
+            }
+
+            const payload2 = {
+                name: name,
+                email: email,
+                password: password,
+                Field: Field,
+                linkedinProfile: linkedinProfile
+            }
+
+            if(student){
+                axios.post('http://localhost:5000/students', payload1)
+                .then(res => {
+                    alert(res);
+                })
+                .catch(err => {
+                    alert(err);
+                })
+            }
+
+            if(mentor){
+                axios.post('http://localhost:5000/mentors', payload2)
+                .then(res => {
+                    alert('registration successful');
+                })
+                .catch(err => {
+                    alert(err);
+                })
+            }
+        }
+
         return(
             <React.Fragment>
                 <br />
@@ -14,61 +71,110 @@ class Register extends Component {
                                 <div className="card-body" className="login">
                                     <form>
                                         <div className="form-group text-left">
-                                            <label htmlFor="exampleInputEmail1">Email address</label>
-                                            <input type="email" 
-                                            className="form-control" 
-                                            id="email" 
-                                            aria-describedby="emailHelp" 
-                                            placeholder="Enter email"
+                                            <label htmlFor="name">Enter Name</label>
+                                            <input type="text" 
+                                                className="form-control" 
+                                                id="name" 
+                                                placeholder="Enter name"
+                                                value = {name}
+                                                onChange = {(e) => {setName(e.target.value)}}
                                             />
                                         </div>
                                         <div className="form-group text-left">
-                                            <label htmlFor="exampleInputPassword1">Password</label>
+                                            <label htmlFor="exampleInputEmail1">Email address</label>
+                                            <input type="email" 
+                                                className="form-control" 
+                                                id="email" 
+                                                placeholder="Enter email"
+                                                value = {email}
+                                                onChange = {(e) => {setEmail(e.target.value)}}
+                                            />
+                                        </div>
+                                        <div className="form-group text-left">
+                                            <label htmlFor="password">Password</label>
                                             <input type="password" 
                                                 className="form-control" 
                                                 id="password" 
                                                 placeholder="Password"
+                                                value = {password}
+                                                onChange = {(e) => {setPassword(e.target.value)}}
                                             />
                                         </div>
                                         <div className="form-group text-left">
-                                            <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                                            <label htmlFor="confirmPassword">Confirm Password</label>
                                             <input type="password" 
                                                 className="form-control" 
                                                 id="confirmPassword" 
                                                 placeholder="Confirm Password"
+                                                value = {confirmPassword}
+                                                onChange = {(e) => {setConfirmPassword(e.target.value)}}
+                                            />
+                                        </div>
+                                        <div className="form-group text-left">
+                                            <label htmlFor="branch">Branch(If student required)</label>
+                                            <input type="text" 
+                                                className="form-control" 
+                                                id="branch" 
+                                                placeholder="Enter branch"
+                                                value = {branch}
+                                                onChange = {(e) => {setBranch(e.target.value)}}
+                                            />
+                                        </div>
+                                        <div className="form-group text-left">
+                                            <label htmlFor="Field">Field(If mentor required)</label>
+                                            <input type="text" 
+                                                className="form-control" 
+                                                id="Field" 
+                                                placeholder="Enter Field"
+                                                value = {Field}
+                                                onChange = {(e) => {setField(e.target.value)}}
                                             />
                                         </div>
                                         <div className="form-group text-left">
                                             <label htmlFor="linkedin">LinkedIn profile URL</label>
                                             <input type="url" 
-                                            className="form-control" 
-                                            id="linkedin" 
-                                            placeholder="LinkedIn profile URL"
+                                                className="form-control" 
+                                                id="linkedin" 
+                                                placeholder="LinkedIn profile URL"
+                                                value = {linkedinProfile}
+                                                onChange = {(e) => {setLinkedin(e.target.value)}}
                                             />
                                         </div>
                                         <label>Register as A</label>
                                         <div className="form-check text-left">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Student" checked />
-                                            <label class="form-check-label" for="exampleRadios1">
+                                            <input className="form-check-input" 
+                                                type="radio" 
+                                                name="student" 
+                                                id="student" 
+                                                value={student} 
+                                                onChange = {() => setStudent(!student)}
+                                            />
+                                            <label className="form-check-label" htmlFor="exampleRadios1">
                                                 Student 
                                             </label>
                                         </div>
                                         <div className="form-check text-left">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Mentor" />
-                                            <label class="form-check-label" for="exampleRadios2">
+                                            <input className="form-check-input" 
+                                                type="radio" 
+                                                name="mentor" 
+                                                id="mentor" 
+                                                value={mentor}
+                                                onChange = {() => setMentor(!mentor)} 
+                                            />
+                                            <label className="form-check-label" htmlFor="exampleRadios2">
                                                 Mentor
                                             </label>
                                         </div>
                                         <div className="form-check text-left">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Admin" />
-                                            <label class="form-check-label" for="exampleRadios3">
+                                            <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Admin" />
+                                            <label className="form-check-label" htmlFor="exampleRadios3">
                                                 Admin
                                             </label>
                                         </div>
                                         <br />
                                         <button 
-                                            type="submit" 
                                             className="btn btn-primary"
+                                            onClick = { handleSubmitClick } 
                                         >
                                             Register
                                         </button>
@@ -80,7 +186,6 @@ class Register extends Component {
                 </div>
             </React.Fragment>
         );
-    }
 }
 
 export default Register;

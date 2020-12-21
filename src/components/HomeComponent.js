@@ -99,9 +99,9 @@ function Home(){
     return(
         <React.Fragment>
             <Jumbotron>
-            <div classNameNameNameName="container">
-                    <div classNameNameNameName="row row-header">
-                        <div classNameNameNameName="col-12 col-sm-6">
+            <div className="container">
+                    <div className="row row-header">
+                        <div className="col-12 col-sm-6">
                             <h1 style={{fontFamily:"Fibra One"}}>Startup Mentoring Platform</h1>
                         </div>      
                     </div>

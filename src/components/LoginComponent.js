@@ -1,7 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
+import axios from 'axios';
 
-class Login extends Component {
-    render(){
+function Login(){
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [student, setStudent] = useState(false);
+    const [mentor, setMentor] = useState(false);
+
+    const PostData = () => {
+        const payload = {
+            "email": email,
+            "password": password
+        }
+
+        if(student){
+            axios.post('http://localhost:5000/students', payload)
+            .then(function(response){
+                if(response.status === 201){
+                    console.log('registration successful');
+                }
+            })
+            .catch(function(error){
+                console.log('error');
+            })
+        }
+
+        if(mentor){
+            axios.post('http://localhost:5000/mentors', payload)
+            .then(function(response){
+                if(response.status === 201){
+                    console.log('registration successful');
+                }
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+    }
+
         return(
             <React.Fragment>
                 <br />
@@ -18,8 +54,9 @@ class Login extends Component {
                                             <input type="email" 
                                                 className="form-control" 
                                                 id="email" 
-                                                aria-describedby="emailHelp" 
                                                 placeholder="Enter email"
+                                                value = {email}
+                                                onChange = { (e) => setEmail(e.target.value) }
                                             />
                                         </div>
                                         <div className="form-group text-left">
@@ -28,11 +65,41 @@ class Login extends Component {
                                                 className="form-control" 
                                                 id="password" 
                                                 placeholder="Password"
+                                                value = {password}
+                                                onChange = { (e) => setPassword(e.target.value) }
                                             />
                                         </div>
+                                        <label>Register as A</label>
+                                        <div className="form-check text-left">
+                                            <input className="form-check-input" 
+                                                type="radio" 
+                                                name="exampleRadios" 
+                                                id="exampleRadios1" 
+                                                value={student} 
+                                                onChange = {() => setStudent(!student)}
+                                                checked 
+                                            />
+                                            <label className="form-check-label" htmlFor="exampleRadios1">
+                                                Student 
+                                            </label>
+                                        </div>
+                                        <div className="form-check text-left">
+                                            <input className="form-check-input" 
+                                                type="radio" 
+                                                name="exampleRadios" 
+                                                id="exampleRadios2" 
+                                                value={mentor}
+                                                onChange = {() => setMentor(!mentor)} 
+                                            />
+                                            <label className="form-check-label" htmlFor="exampleRadios2">
+                                                Mentor
+                                            </label>
+                                        </div>
+                                        <br />
                                         <button 
                                             type="submit" 
                                             className="btn btn-primary"
+                                            onSubmit = {() => PostData}
                                         >
                                             Login
                                         </button>
@@ -44,7 +111,6 @@ class Login extends Component {
                 </div>
             </React.Fragment>
         );
-    }
 }
 
 export default Login;
