@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from "axios";
 
 function Register(){
+        const history = useHistory(); 
         const [name, setName] = useState("")
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
@@ -41,7 +43,8 @@ function Register(){
             if(student){
                 axios.post('http://localhost:5000/students', payload1)
                 .then(res => {
-                    alert(res);
+                    alert('Successfully registered!');
+                    history.push('/login');
                 })
                 .catch(err => {
                     alert(err);

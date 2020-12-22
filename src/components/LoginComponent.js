@@ -1,7 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState, useContext} from 'react';
+import {useHistory,Link} from 'react-router-dom';
+import {UserContext} from '../App';
 import axios from 'axios';
 
 function Login(){
+    const {state,dispatch} = useContext(UserContext);
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [student, setStudent] = useState(false);
@@ -15,25 +19,32 @@ function Login(){
             password: password
         }
 
-        console.log(payload);
-
         if(student){
             axios.post('http://localhost:5000/students/login', payload)
-            .then(res => {
+            .then( res => {
+                    console.log(res.data);
+                    localStorage.setItem("jwt",res.data.token);
+                    localStorage.setItem("user",JSON.stringify(res.data.user));
+                    dispatch({type:"USER", payload:res.data});
                     alert('login successful');
+                    history.push('/home');
             })
             .catch(err => {
-                console.log(err);
+                alert(err);
             })
         }
 
         if(mentor){
             axios.post('http://localhost:5000/mentors/login', payload)
             .then(res => {
-                    console.log('login successful');
+                localStorage.setItem("jwt",res.data.token);
+                localStorage.setItem("user",JSON.stringify(res.data.mentor));
+                dispatch({type:"USER", payload:res.data});
+                alert('login successful');
+                history.push('/home');
             })
             .catch(err => {
-                console.log(err);
+                alert(err);
             })
         }
     }
@@ -101,6 +112,9 @@ function Login(){
                                         >
                                             Login
                                         </button>
+                                        <h5>
+                                            <Link to="/register">Dont have an account ?</Link>
+                                        </h5>
                                     </form>
                                 </div>
                             </div>

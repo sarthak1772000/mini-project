@@ -19,10 +19,11 @@ router.post('/students', async (req, res) => {
 router.post('/students/login', async (req, res) => {
     try {
         const stu = await student.findByCredentials(req.body.email, req.body.password)
-        const token = await stu.generateAuthToken()
-        res.send({ stu, token })
+        const token = await stu.generateAuthToken();
+        const {_id,name,email,branch,linkedinProfile} = stu;
+        res.json({ user:{_id,name,email,branch,linkedinProfile}, token })
     } catch (e) {
-        res.status(400).send()
+        res.status(400).json({error:"Invalid Email or password"})
     }
 })
 

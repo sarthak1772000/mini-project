@@ -1,80 +1,83 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react';
 import {Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem,Button, Jumbotron } from 'reactstrap';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
+import {UserContext} from '../App';
 
-class Header extends Component{
+function Header(){
+    const {state,dispatch} = useContext(UserContext);
+    const [isNavOpen,toggleNav] = useState(false);
+    const history = useHistory();
 
-    constructor(props) {
-        super(props);
-    
-        this.toggleNav = this.toggleNav.bind(this);
-        this.state = {
-          isNavOpen: false
-        };
-      }
-
-      toggleNav() {
-        this.setState({
-          isNavOpen: !this.state.isNavOpen
-        });
-      }
-
-    render() {
-        return(
-            <React.Fragment>
-            <Navbar dark expand="md">
-                    <div className="container">
-                        <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/">
-                            <h2>Startup</h2>
-                        </NavbarBrand>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
+    const Nav1 = () =>{        
+            return(
+                <React.Fragment>
+                <Navbar dark expand="md">
+                        <div className="container">
+                            <NavbarToggler onClick={() => toggleNav(!isNavOpen)} />
+                            <NavbarBrand className="mr-auto" href="/">
+                                <h2>Startup</h2>
+                            </NavbarBrand>
+                            <Collapse isOpen={isNavOpen} navbar>
                             <Nav navbar>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/home">
+                                    <span className="fa fa-home fa-lg"></span> Home
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/submitIdea">
+                                    <span className="fa fa-plus-square-o fa-lg"></span> Submit Idea
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
+                        <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/home">
-                                        <span className="fa fa-home fa-lg"></span> Home
+                                    <NavLink className="nav-link" to="/idea">
+                                        <span className="fa fa-users fa-lg"></span> Student Ideas
                                     </NavLink>
                                 </NavItem>
+                        </Nav>
+                        <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
-                                    <div className="dropdown">
-                                        <a className="nav-link dropdown-toggle" to="#" data-toggle="dropdown">
-                                            <span className="fa fa-info fa-lg"></span> About Us 
-                                        </a>
-                                    </div>
-                                </NavItem>
-                                <NavItem>
-                                    <div className="dropdown">
-                                        <a className="nav-link dropdown-toggle" to="#" data-toggle="dropdown">
-                                            <span className="fa fa-pencil fa-lg"></span> Activities
-                                        </a>
-                                        <div className="dropdown-menu">
-                                            <a className="dropdown-item" href="#">Events<span className="fa fa-pencil fa-lg pull-right"></span></a>
-                                            <a className="dropdown-item" href="#">Sessions<span className="fa fa-pencil fa-lg pull-right"></span></a>
-                                            <a className="dropdown-item" href="#">Projects<span className="fa fa-pencil fa-lg pull-right"></span></a>
-                                            <a className="dropdown-item" href="#">Research Symposium<span className="fa fa-pencil fa-lg "></span></a>
-                                            <a className="dropdown-item" href="#">View All Activities<span className="fa fa-pencil fa-lg pull-right"></span></a>
-                                        </div>
-                                    </div>
-                                </NavItem>
-                                <NavItem>
-                                    <a className="nav-link" to="#">
-                                        <span className="fa fa-edit fa-lg"></span> Blog
-                                    </a>
-                                </NavItem>
-                                <NavItem>
-                                    <a className="nav-link" to="#">
-                                        <span className="fa fa-address-card fa-lg"></span> Contact Us
-                                    </a>
-                                </NavItem>
-                            </Nav>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/submitIdea">
-                                        <span className="fa fa-plus-square-o fa-lg"></span> Submit Idea
+                                    <NavLink className="nav-link" to="/profile">
+                                        <span className="fa fa-user fa-lg"></span> Profile
                                     </NavLink>
                                 </NavItem>
                             </Nav>
-                            <Nav style={{marginLeft:"10px"}} navbar>
+                        <Nav style={{marginLeft:"10px"}} navbar>
+                                <NavItem>
+                                    <button className="btn btn-danger"
+                                        onClick={() => {
+                                            localStorage.clear();
+                                            dispatch({type:"CLEAR"});
+                                            history.push('/login');
+                                        }
+                                        }
+                                    >
+                                        Log out
+                                    </button>
+                                </NavItem>
+                            </Nav>
+                            </Collapse>
+                        </div>
+                </Navbar>
+    </React.Fragment>
+            );
+        }
+
+        const Nav2 = () =>{
+            return(
+                <React.Fragment>
+                    <Navbar dark expand="md">
+                            <div className="container">
+                                <NavbarToggler onClick={() => toggleNav(!isNavOpen)} />
+                                <NavbarBrand className="mr-auto" href="/">
+                                    <h2>Startup</h2>
+                                </NavbarBrand>
+                                <Collapse isOpen={isNavOpen} navbar>
+                                <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/register">
                                         <span className="fa fa-plus fa-lg"></span> Register
@@ -88,13 +91,24 @@ class Header extends Component{
                                     </NavLink>
                                 </NavItem>
                             </Nav>
-                        </Collapse>
-                    </div>
-                </Navbar>
-                </React.Fragment>
-        );
+                                </Collapse>
+                            </div>
+                    </Navbar>
+                    </React.Fragment>
+            );
+        }
+        
+
+    if(state){
+        console.log(state);
+        return <Nav1 />
     }
+    else
+        return <Nav2 />
 }
+
+
+
 
 
 export default Header;

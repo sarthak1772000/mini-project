@@ -1,18 +1,58 @@
 import './App.css';
-import Main from './components/MainComponent';
-import { BrowserRouter } from 'react-router-dom';
-import { Component } from 'react';
+import { BrowserRouter,useHistory } from 'react-router-dom';
+import React,{useEffect,createContext,useReducer,useContext} from 'react';
+import Header from './components/HeaderComponent';
+import Footer from './components/FooterComponent';
+import Home from './components/HomeComponent';
+import SubmitIdea from './components/SubmitIdea';
+import Register from './components/RegisterComponent';
+import Login from './components/LoginComponent';
+import Profile from './components/ProfileComponent';
+import Idea from './components/IdeaComponent';
+import {reducer,initialState} from './reducers/userReducer'
+import { Switch, Route} from 'react-router-dom';
 
-class App extends Component{
-  render(){
+export const UserContext = createContext()
+
+
+function Main(){
+  const history = useHistory()
+  const {state,dispatch} = useContext(UserContext)
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("user"))
+    if(user){
+      dispatch({type:"USER",payload:user})
+      history.push('/');
+    }else{
+      history.push('/login')
+    }
+  },[])
+      return(
+              <Switch>
+                  <Route exact path='/' component={ Home }/>
+                  <Route exact path='/home' component={ Home }/>
+                  <Route path='/idea' component={ Idea }/>
+                  <Route path='/submitIdea' component={ SubmitIdea }/>
+                  <Route path='/register' component={ Register }/>
+                  <Route path='/login' component={ Login }/>
+                  <Route path='/profile' component={ Profile }/>
+              </Switch>
+      );
+}
+
+function App(){
+  const [state,dispatch] = useReducer(reducer,initialState);
   return (
+    <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>
     <div className="App">
+        <Header />
         <Main />
+        <Footer />
     </div>
     </BrowserRouter>
+    </UserContext.Provider>
   );
-  }
 }
 
 export default App;

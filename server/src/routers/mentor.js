@@ -20,7 +20,8 @@ router.post('/mentors/login', async (req, res) => {
     try {
         const men = await mentor.findByCredentials(req.body.email, req.body.password)
         const token = await men.generateAuthToken()
-        res.send({ men, token })
+        const {_id,name,email,Field,linkedinProfile} = men;
+        res.json({ mentor:{_id,name,email,Field,linkedinProfile}, token })
     } catch (e) {
         res.status(400).send()
     }
