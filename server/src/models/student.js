@@ -55,6 +55,10 @@ const studentSchema = new mongoose.Schema({
             }
         }
     },
+    pic :{
+        type:String,
+        default: "https://img.icons8.com/bubbles/100/000000/user.png"
+    },
     tokens: [{
         token: {
             type: String,

@@ -3,7 +3,7 @@ import {useContext, useState,useEffect} from 'react';
 import {UserContext} from '../App';
 import {Link} from 'react-router-dom';
 
-const Profile = () => {
+const MentorProfile = () => {
     const {state,dispatch} = useContext(UserContext);
     const [image,setImage] = useState("");
      useEffect(() =>{
@@ -18,7 +18,7 @@ const Profile = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-           fetch('http://localhost:5000/students/updatepic',{
+           fetch('http://localhost:5000/mentors/updatepic',{
                method:"put",
                headers:{
                    "Content-Type":"application/json",
@@ -69,10 +69,10 @@ const Profile = () => {
                                         <h6 className="text-muted f-w-400">{state?state.email:"loading"}</h6>
                                     </div>
                                 </div>
-                                <h6 className="m-b-20 p-b-5 b-b-default f-w-600">Branch</h6>
+                                <h6 className="m-b-20 p-b-5 b-b-default f-w-600">Field</h6>
                                 <div className="row">
                                     <div className="col-sm-6">
-                                        <p className="m-b-10 f-w-600">{state?state.branch:"loading"}</p>
+                                        <p className="m-b-10 f-w-600">{state?state.Field:"loading"}</p>
                                     </div>
                                 </div>
                                 <ul className="social-link list-unstyled m-t-40 m-b-10">
@@ -89,5 +89,5 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default MentorProfile;
 

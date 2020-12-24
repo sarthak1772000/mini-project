@@ -9,13 +9,14 @@ import Register from './components/RegisterComponent';
 import Login from './components/LoginComponent';
 import Profile from './components/ProfileComponent';
 import Idea from './components/IdeaComponent';
+import MentorProfile from './components/MentorProfile';
 import {reducer,initialState} from './reducers/userReducer'
 import { Switch, Route} from 'react-router-dom';
 
 export const UserContext = createContext()
 
 
-function Main(){
+const Main = () => {
   const history = useHistory()
   const {state,dispatch} = useContext(UserContext)
   useEffect(()=>{
@@ -36,6 +37,7 @@ function Main(){
                   <Route path='/register' component={ Register }/>
                   <Route path='/login' component={ Login }/>
                   <Route path='/profile' component={ Profile }/>
+                  <Route path='/mentorprofile' component={ MentorProfile }/>
               </Switch>
       );
 }

@@ -20,8 +20,8 @@ router.post('/students/login', async (req, res) => {
     try {
         const stu = await student.findByCredentials(req.body.email, req.body.password)
         const token = await stu.generateAuthToken();
-        const {_id,name,email,branch,linkedinProfile} = stu;
-        res.json({ user:{_id,name,email,branch,linkedinProfile}, token })
+        const {_id,name,email,branch,linkedinProfile,pic} = stu;
+        res.json({ user:{_id,name,email,branch,linkedinProfile,pic}, token })
     } catch (e) {
         res.status(400).json({error:"Invalid Email or password"})
     }
@@ -112,6 +112,17 @@ router.delete('/students/me', auth, async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
+})
+
+router.put('/students/updatepic',auth,(req,res)=>{
+    console.log(req);
+    student.findByIdAndUpdate(req.stu._id,{$set:{pic:req.body.pic}},{new:true},
+        (err,result)=>{
+         if(err){
+             return res.status(422).json({error:"pic canot post"})
+         }
+         res.json(result)
+    })
 })
 
 module.exports = router

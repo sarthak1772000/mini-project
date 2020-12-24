@@ -25,7 +25,7 @@ function Login(){
                     console.log(res.data);
                     localStorage.setItem("jwt",res.data.token);
                     localStorage.setItem("user",JSON.stringify(res.data.user));
-                    dispatch({type:"USER", payload:res.data});
+                    dispatch({type:"USER", payload:res.data.user});
                     alert('login successful');
                     history.push('/home');
             })
@@ -38,8 +38,8 @@ function Login(){
             axios.post('http://localhost:5000/mentors/login', payload)
             .then(res => {
                 localStorage.setItem("jwt",res.data.token);
-                localStorage.setItem("user",JSON.stringify(res.data.mentor));
-                dispatch({type:"USER", payload:res.data});
+                localStorage.setItem("user",JSON.stringify(res.data.user));
+                dispatch({type:"USER", payload:res.data.user});
                 alert('login successful');
                 history.push('/home');
             })
