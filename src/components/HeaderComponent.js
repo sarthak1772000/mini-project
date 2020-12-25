@@ -34,13 +34,6 @@ function Header(){
                         </Nav>
                         <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/idea">
-                                        <span className="fa fa-users fa-lg"></span> Student Ideas
-                                    </NavLink>
-                                </NavItem>
-                        </Nav>
-                        <Nav style={{marginLeft:"10px"}} navbar>
-                                <NavItem>
                                     <NavLink className="nav-link" to="/profile">
                                         <span className="fa fa-user fa-lg"></span> Profile
                                     </NavLink>

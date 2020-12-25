@@ -76,7 +76,7 @@ const Profile = () => {
                                     </div>
                                 </div>
                                 <ul className="social-link list-unstyled m-t-40 m-b-10">
-                                    <li><Link href={state?state.linkedinProfile:"#"} data-toggle="tooltip" data-placement="bottom" title="" data-original-title="linkedin" data-abc="true"><i className="fa fa-linkedin-square fa-lg" aria-hidden="true"></i></Link></li>
+                                    <li><a href={state?state.linkedinProfile:"#"} target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="linkedin" data-abc="true"><i className="fa fa-linkedin-square fa-lg" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
