@@ -34,11 +34,18 @@ function Header(){
                         </Nav>
                         <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
+                                    <NavLink className="nav-link" to="/allmentors">
+                                        <span className="fa fa-address-card fa-lg"></span> Browse Mentors
+                                    </NavLink>
+                                </NavItem>
+                        </Nav>
+                        <Nav style={{marginLeft:"10px"}} navbar>
+                                <NavItem>
                                     <NavLink className="nav-link" to="/profile">
                                         <span className="fa fa-user fa-lg"></span> Profile
                                     </NavLink>
                                 </NavItem>
-                            </Nav>
+                        </Nav>
                         <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
                                     <button className="btn btn-danger"

@@ -11,6 +11,7 @@ import Profile from './components/ProfileComponent';
 import Idea from './components/IdeaComponent';
 import MentorProfile from './components/MentorProfile';
 import DetailIdea from './components/DetailIdea';
+import AllMentors from './components/AllMentors';
 import {reducer,initialState} from './reducers/userReducer'
 import { Switch, Route} from 'react-router-dom';
 
@@ -40,7 +41,8 @@ const Main = () => {
                   <Route path='/profile' component={ Profile }/>
                   <Route path='/mentorprofile' component={ MentorProfile }/>
                   <Route path='/profile' component={ Profile }/>
-                  <Route path='/detailidea' component={ DetailIdea} /> 
+                  <Route path='/detailidea' component={ DetailIdea} />
+                  <Route path='/allmentors' component={ AllMentors} /> 
               </Switch>
       );
 }

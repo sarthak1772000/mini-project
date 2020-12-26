@@ -1,11 +1,25 @@
 import "../profile.css";
+import React from 'react';
 import {useContext, useState,useEffect} from 'react';
 import {UserContext} from '../App';
 import {Link} from 'react-router-dom';
 
 const Profile = () => {
+    const [idea,setIdea] = useState([]);
     const {state,dispatch} = useContext(UserContext);
     const [image,setImage] = useState("");
+    useEffect(()=>{
+        fetch('/getmyidea',{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            setIdea(result.submitidea)
+        })
+     },[])
+
      useEffect(() =>{
         if(image){
         const data = new FormData()
@@ -44,6 +58,7 @@ const Profile = () => {
     }
 
     return(
+        <React.Fragment>
         <div className="page-content page-container" id="page-content">
         <div className="padding">
         <div className="row container d-flex justify-content-center">
@@ -84,8 +99,33 @@ const Profile = () => {
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        </div>
+        </div>
+        <hr/>
+        <h3 style={{textAlign:"center"}}>My idea Submissions</h3>
+        <div className="card-deck" style={{margin: "50px 10px auto"}}>
+        {
+            idea.map(item => {
+            return(    
+                <div className="card" className="col-md-3"key={item._id}>
+                <img className="card-img-top" src="https://images.unsplash.com/photo-1533901567451-7a6e68d6cd8f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" />
+                <div className="card-body">
+                    <h5 className="card-title">{item.groupName}</h5>
+                    <p className="card-text">{item.abstract}</p>
+                    <Link className="button-primary" to={{
+                        pathname:'/detailidea',
+                        detail :{
+                            item: item
+                        }
+                    }}>Read More</Link>
+                </div>
+                </div>   
+            );
+            }
+            )       
+        }
+        </div>
+        </React.Fragment>
     );
 }
 

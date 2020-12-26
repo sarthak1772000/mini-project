@@ -1,6 +1,7 @@
 const express = require('express')
 const student = require('../models/student')
 const auth = require('../middleware/auth')
+const auth1 = require('../middleware/auth1');
 
 const router = new express.Router()
 

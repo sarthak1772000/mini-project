@@ -2,6 +2,7 @@
 const express = require('express')
 const submitIdea = require('../models/submitIdea')
 const auth = require('../middleware/auth')
+const auth1 = require('../middleware/auth1');
 const router = new express.Router()
 
 
@@ -27,7 +28,7 @@ router.post('/submitIdea', auth , async (req,res) =>{
 
 })
 
-router.get('/allideas' ,async (req,res) =>{
+router.get('/allideas' ,auth1, async (req,res) =>{
     try{
         const submitidea= await submitIdea.find().populate('owner')
         res.json({submitidea});
@@ -40,7 +41,7 @@ router.get('/allideas' ,async (req,res) =>{
 router.get('/getmyidea' ,auth ,async(req,res) =>{
     try{
        const submitidea= await submitIdea.find({owner: req.stu.id}).populate('owner');
-       res.send(submitidea)
+       res.json({submitidea})
     }catch(e)
     {
         res.status(404).send(e);

@@ -98,4 +98,15 @@ router.put('/mentors/updatepic',auth1,(req,res)=>{
     })
 })
 
+router.get('/getmentors' ,auth, async (req,res) =>{
+    try{
+        const mentors= await mentor.find()
+        console.log(mentors);
+        res.json({mentors});
+    }catch(e)
+    {
+        res.status(404).send(e);
+    }
+})
+
 module.exports = router
