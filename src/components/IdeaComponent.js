@@ -19,7 +19,7 @@ const Idea = () => {
         {
             data.map(item => {
             return(    
-                <div className="card" className="col-md-3"key={item._id}>
+                <div className="card top" className="col-md-3"key={item._id}>
                 <img className="card-img-top" src="https://images.unsplash.com/photo-1533901567451-7a6e68d6cd8f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" />
                 <div className="card-body">
                     <h5 className="card-title">{item.groupName}</h5>

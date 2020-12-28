@@ -48,6 +48,13 @@ function Header(){
                         </Nav>
                         <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
+                                    <NavLink className="nav-link" to="/updateaccount">
+                                        <span className="fa fa-wrench fa-lg"></span> Update Account
+                                    </NavLink>
+                                </NavItem>
+                        </Nav>
+                        <Nav style={{marginLeft:"10px"}} navbar>
+                                <NavItem>
                                     <button className="btn btn-danger"
                                         onClick={() => {
                                             localStorage.clear();
@@ -152,11 +159,9 @@ function Header(){
         
 
     if(state && state.branch){
-        console.log(state);
         return <Nav1 />;
     }
     else if(state && state.Field){
-        console.log(state);
         return <Nav3 />
     }
     else{

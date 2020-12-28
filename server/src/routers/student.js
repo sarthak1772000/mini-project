@@ -75,26 +75,31 @@ router.get('/students/:id', async (req, res) => {
 })
 
 router.patch('/students/me', auth , async (req, res) => {
+    console.log(req.body);
+
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'email', 'password']
+    console.log(updates);
+    const allowedUpdates = ['name', 'email', 'password', 'branch', 'linkedinProfile']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
+        console.log('Hii1');
         return res.status(400).send({ error: 'Invalid updates!' })
     }
 
     try {
         //const stu = await student.findById(req.params.id)
-
+        
         updates.forEach((update) => req.stu[update] = req.body[update])
         await req.stu.save()
-
+        console.log(Hii3);
         // if (!stu) {
         //     return res.status(404).send()
         // }
-
-        res.send(req.stu);
+        
+        res.json(req.stu);
     } catch (e) {
+        console.log('Hii2')
         res.status(400).send(e)
     }
 })

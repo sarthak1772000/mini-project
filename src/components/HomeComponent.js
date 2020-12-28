@@ -2,24 +2,6 @@ import React from 'react';
 import { Jumbotron } from 'reactstrap';
 import "../profile.css";
 
-const Profile1 = () =>{
-    return(
-        <div className="container">
-            <div className="col-md-4">
-            <div class="profile-card-4 text-center"><img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg" class="img img-responsive" />
-            <div class="profile-content">
-                <div class="profile-name">John Doe
-                    <p>@johndoedesigner</p>
-                </div>
-                <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-                <a href="#"><span className="fa fa-linkedin-square fa-lg"></span></a>
-            </div>
-            </div>
-            </div>
-        </div>
-    );
-}
-
 function Profile(){
     return(
         <div className="page-content page-container" id="page-content">
@@ -127,7 +109,6 @@ function Home(){
             </Jumbotron>
             <Idea />
             <Profile />
-            <Profile1 />
         </React.Fragment>
     );
 }

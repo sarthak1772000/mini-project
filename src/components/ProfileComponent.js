@@ -15,7 +15,6 @@ const Profile = () => {
             }
         }).then(res=>res.json())
         .then(result=>{
-            console.log(result)
             setIdea(result.submitidea)
         })
      },[])
@@ -55,6 +54,23 @@ const Profile = () => {
     },[image])
     const updatePhoto = (file)=>{
         setImage(file)
+    }
+
+    const deleteIdea = (ideaid)=>{
+        console.log('Hii');
+        fetch(`/deleteidea/${ideaid}`,{
+            method:"delete",
+            headers:{
+                Authorization:"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            const newData = idea.filter(item=>{
+                return item._id !== result._id
+            })
+            setIdea(newData)
+        })
     }
 
     return(
@@ -118,6 +134,11 @@ const Profile = () => {
                             item: item
                         }
                     }}>Read More</Link>
+                    <br />
+                    <i className="fa fa-trash fa-lg ml-auto"
+                        onClick={() => deleteIdea(item._id)}
+                    >
+                    </i>
                 </div>
                 </div>   
             );

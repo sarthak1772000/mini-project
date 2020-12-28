@@ -88,7 +88,6 @@ router.delete('/mentors/:id', async (req, res) => {
 })
 
 router.put('/mentors/updatepic',auth1,(req,res)=>{
-    console.log(req);
     mentor.findByIdAndUpdate(req.men._id,{$set:{pic:req.body.pic}},{new:true},
         (err,result)=>{
          if(err){
@@ -101,7 +100,6 @@ router.put('/mentors/updatepic',auth1,(req,res)=>{
 router.get('/getmentors' ,auth, async (req,res) =>{
     try{
         const mentors= await mentor.find()
-        console.log(mentors);
         res.json({mentors});
     }catch(e)
     {

@@ -76,15 +76,33 @@ router.patch('/updatemyidea', auth, async(req,res) => {
     }
 })
 
-router.delete('/deleteidea', auth , async(req,res) =>{
+router.delete('/deleteidea/:ideaId',auth,(req,res)=>{
+    console.log('Hii');
+    submitIdea.findOne({_id:req.params.ideaId})
+    .populate("owner","_id")
+    .exec((err,idea)=>{
+        if(err || !idea){
+            return res.status(422).json({error:err})
+        }
+        if(idea.owner._id.toString() === req.stu._id.toString()){
+              idea.remove()
+              .then(result=>{
+                  res.json(result)
+              }).catch(err=>{
+                  console.log(err)
+              })
+        }
+    })
+})
+/*router.delete('/deleteidea', auth , async(req,res) =>{
     try{
         await submitIdea.deleteOne({owner:req.stu._id});
-        res.send();
+        res.json({mesage:"post successfully deleted"});
     } catch(e)
     {
         res.status(400).send(e);
     }
 
 })
-
+*/
 module.exports = router
