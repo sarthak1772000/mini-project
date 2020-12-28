@@ -97,6 +97,37 @@ router.put('/mentors/updatepic',auth1,(req,res)=>{
     })
 })
 
+router.patch('/mentors/me', auth1 , async (req, res) => {
+    console.log('Hii');
+    console.log(req.body);
+
+    const updates = Object.keys(req.body)
+    console.log(updates);
+    const allowedUpdates = ['name', 'email', 'password', 'Field', 'linkedinProfile']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        console.log('Hii1');
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        //const stu = await student.findById(req.params.id)
+        
+        updates.forEach((update) => req.men[update] = req.body[update])
+        await req.men.save()
+        console.log(Hii3);
+        // if (!stu) {
+        //     return res.status(404).send()
+        // }
+        
+        res.json(req.men);
+    } catch (e) {
+        console.log('Hii2')
+        res.status(400).send(e)
+    }
+})
+
 router.get('/getmentors' ,auth, async (req,res) =>{
     try{
         const mentors= await mentor.find()

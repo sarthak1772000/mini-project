@@ -29,6 +29,7 @@ const AllMentors = () =>{
                                 <h5>{item.name}</h5>
                                 <div className="profile-description">{item.Field}</div>
                                 <a href={item.linkedinProfile} target="_blank"><span className="fa fa-linkedin-square fa-lg"></span></a>
+                                <a href={`mailto:${item.email}`} target="_blank" ><span className="fa fa-envelope fa-lg" style={{marginLeft:"10px"}}></span></a>
                             </div>
                             </div>
                     </div>

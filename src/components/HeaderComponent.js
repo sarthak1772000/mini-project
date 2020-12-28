@@ -104,7 +104,14 @@ function Header(){
                                         <span className="fa fa-user fa-lg"></span> Profile
                                     </NavLink>
                                 </NavItem>
-                            </Nav>
+                        </Nav>
+                        <Nav style={{marginLeft:"10px"}} navbar>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/updateaccount">
+                                        <span className="fa fa-wrench fa-lg"></span> Update Account
+                                    </NavLink>
+                                </NavItem>
+                        </Nav>
                         <Nav style={{marginLeft:"10px"}} navbar>
                                 <NavItem>
                                     <button className="btn btn-danger"

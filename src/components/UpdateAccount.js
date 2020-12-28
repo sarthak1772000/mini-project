@@ -33,12 +33,12 @@ function UpdateAccount(){
 
             if(student){
                 fetch("/students/me",{
-                    method:"patch",
+                    method:"PATCH",
                     headers:{
                         "Content-Type":"application/json",
                         "Authorization":"Bearer "+localStorage.getItem("jwt")
                     },
-                    body:({
+                    body:JSON.stringify({
                         name: name,
                         password: password,
                         branch: branch,
@@ -55,9 +55,22 @@ function UpdateAccount(){
             }
 
             if(mentor){
-                axios.patch('http://localhost:5000/mentors', payload2)
+                fetch("/mentors/me",{
+                    method:"PATCH",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":"Bearer "+localStorage.getItem("jwt")
+                    },
+                    body:JSON.stringify({
+                        name: name,
+                        password: password,
+                        Field: Field,
+                        linkedinProfile: linkedinProfile
+                    })
+                })
                 .then(res => {
-                    alert('registration successful');
+                    console.log(res);
+                    alert('Successfully updated now relogin!');
                 })
                 .catch(err => {
                     alert(err);
